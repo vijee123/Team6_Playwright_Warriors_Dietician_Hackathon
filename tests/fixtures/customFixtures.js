@@ -1,5 +1,6 @@
 import{test as base} from 'playwright-bdd';
 import LoginPage from '../../pages/loginPage.js';
+import EditPatientPage from '../../pages/editPatientPage.js';
 
 
 export const test = base.extend({
@@ -18,6 +19,16 @@ export const test = base.extend({
     //     const dashboardPage = new DashboardPage(page);
     //     await use(dashboardPage);
     // },
+
+    // editPatient fixture
+    editPatientFixture:async({page},use)=>{
+          console.log("Inside the editPatientPage Fixture");
+          const editPatientPage = new EditPatientPage(page);
+          await editPatientPage.navigateToUrl('/readpatients');
+          await use(editPatientPage);       
+    }
+
+    
 
 
 });
