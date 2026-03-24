@@ -1,12 +1,14 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
 import { defineBddConfig } from 'playwright-bdd';
+import dotenv from 'dotenv';
 
 const testDir = defineBddConfig({
   features: 'tests/features/**/*.feature',
   steps: [
     'tests/stepDefinitions/**/*.js',
     'tests/fixtures/**/*.js',
+    '!tests/setup/authSetup.js',
     'pages/**/*.js'
   ],
 });
@@ -15,9 +17,7 @@ const testDir = defineBddConfig({
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
- import dotenv from 'dotenv';
- import path from 'path';
- dotenv.config({ path: path.resolve(__dirname, '.env') });
+   dotenv.config({ path: '.env' });
 
 /**
  * @see https://playwright.dev/docs/test-configuration
@@ -51,15 +51,42 @@ export default defineConfig({
      trace: 'on-first-retry',
      screenshot: 'only-on-failure',
      video: 'retain-on-failure',
-    // retries: 2, 
+     retries: 2, 
   },
 
   /* Configure projects for major browsers */
   projects: [
+
+    // Runs this first to save storageStateSession details to user.json
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      
+      name: 'setup',
+      testDir: 'tests/setup',
+      testMatch: ['authSetup.js'],
     },
+      
+    //To avoid using storage state in Login tests
+    {
+      name: 'login-test-chromium',
+      use: { ...devices['Desktop Chrome'] },
+      testMatch: '**/.features-gen/**/01Login.feature.spec.js',
+    },
+
+    //To use storage state in all other features tests 
+    {
+      name: 'features-using-storageState-Chromium',
+      use:{ ...devices['Desktop Chrome'],
+        storageState: 'auth/user.json',
+       },
+      testMatch: '**/.features-gen/**/*.spec.js',
+      dependencies: ['setup'],
+    },
+
+
+    // {
+    //   name: 'chromium',
+    //   use: { ...devices['Desktop Chrome'] },
+    // },
 
     // {
     //   name: 'firefox',
