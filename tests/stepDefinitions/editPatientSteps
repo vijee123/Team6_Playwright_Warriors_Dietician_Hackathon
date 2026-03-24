@@ -5,12 +5,12 @@ import { createBdd } from 'playwright-bdd';
 const { Given, When, Then } = createBdd(test);
 
 
-When('User clicks the Edit Icon button of a patient', async ({page}) => {
+When('User clicks the Edit Icon button of a patient', async ({editPatientFixture}) => {
   logger.info('User clicks the Edit Icon button of a patient..');
   // From: tests\features\06EditPatient.feature:4:14
 });
 
-Then('User should see the {string} in the edit patient page', async ({page}, arg) => {
+Then('User should see the {string} in the edit patient page', async ({editPatientFixture}, arg) => {
   logger.info('User should see the pageTitle in the edit patient page');
   // From: tests\features\06EditPatient.feature:8:12
 });
