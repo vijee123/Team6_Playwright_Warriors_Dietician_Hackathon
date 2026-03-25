@@ -43,9 +43,9 @@ constructor(page) {
     return this.patientData.contactNo;
   }
 
-  get patientData() {
-    return this.patientData;
-  }
+  // get patientData() {
+  //   return this.patientData;
+  // }
 
 
 

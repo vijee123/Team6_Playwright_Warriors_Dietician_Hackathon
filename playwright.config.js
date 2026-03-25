@@ -1,4 +1,3 @@
-
 import { defineConfig, devices } from '@playwright/test';
 import { defineBddConfig } from 'playwright-bdd';
 import dotenv from 'dotenv';
@@ -19,10 +18,10 @@ const testDir = defineBddConfig({
 
 export default defineConfig({
   testDir,
-  fullyParallel: false,
+  fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 2 : 2,
+  workers: process.env.CI ? 3 : 3,
 
   // grep: /@smoke/,   
   // grepInvert: /@regression/, 
@@ -49,7 +48,7 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
 
-    // // Runs this first to save storageStateSession details to user.json
+    // Runs this first to save storageStateSession details to user.json
     {      
       name: 'setup',
       testDir: 'tests/setup',
@@ -63,6 +62,18 @@ export default defineConfig({
       testMatch: '**/.features-gen/**/01Login.feature.spec.js',
     },
 
+    {
+      name: 'login-firefox',
+      use: { ...devices['Desktop Firefox'] },
+      testMatch: '**/.features-gen/**/01Login.feature.spec.js',
+    },
+
+    {
+      name: 'login-webkit',
+      use: { ...devices['Desktop Safari'] },
+      testMatch: '**/.features-gen/**/01Login.feature.spec.js',
+    },
+
     //To use storage state in all other features tests 
     {
       name: 'features-using-storageState-Chromium',
@@ -73,21 +84,26 @@ export default defineConfig({
      // dependencies: ['setup'],
     },
 
+     {
+      name: 'features-firefox',
+      use: {
+        ...devices['Desktop Firefox'],
+        storageState: 'auth/user.json',
+      },
+      testMatch: '**/.features-gen/**/*.spec.js',
+      //dependencies: ['setup'],
+    },
 
-    // {
-    //   name: 'chromium',
-    //   use: { ...devices['Desktop Chrome'] },
-    // },
+    {
+      name: 'features-webkit',
+      use: {
+        ...devices['Desktop Safari'],
+        storageState: 'auth/user.json',
+      },
+      testMatch: '**/.features-gen/**/*.spec.js',
+      //dependencies: ['setup'], 
+    },
 
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
 
     /* Test against mobile viewports. */
     // {
