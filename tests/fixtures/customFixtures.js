@@ -18,7 +18,7 @@ export const test = base.extend({
         dashboardPageFixture:async({page},use)=>{
         console.log("Using the Dashboard Fixture");
         const dashboardPage = new DashboardPage(page);
-        await dashboardPage.goto('/dashboardPatients');
+        await dashboardPage.goto();
         await use(dashboardPage);
     },
 
