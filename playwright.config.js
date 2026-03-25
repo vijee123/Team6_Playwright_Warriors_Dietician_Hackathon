@@ -12,20 +12,14 @@ const testDir = defineBddConfig({
   ],
 });
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-   dotenv.config({ path: '.env' });
+// Read environment variables from file.
+    dotenv.config({ path: '.env' });
 
-/**
- * @see https://playwright.dev/docs/test-configuration
- */
+
 export default defineConfig({
   testDir,
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 3 : 3,
 
@@ -35,18 +29,15 @@ export default defineConfig({
     ['html'],
     ['list'],
     ['allure-playwright', {
-      outputFolder: 'allure-results',  // MUST match Jenkins results path
+      outputFolder: 'allure-results',  
     }]
   ],
   timeout: 30* 1000,
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+
   use: {
-    /* Base URL to use in actions like `await page.goto('')`. */
      baseURL: process.env.baseUrl,
      headless: true, 
      slowMo: process.env.CI ? 0 : 1000, 
-
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
      trace: 'on-first-retry',
      screenshot: 'only-on-failure',
      video: 'retain-on-failure',
