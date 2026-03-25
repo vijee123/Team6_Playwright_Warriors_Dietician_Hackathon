@@ -25,7 +25,6 @@ export default defineConfig({
 
   // grep: /@smoke/,   
   // grepInvert: /@regression/, 
-
   reporter: [
     ['html'],
     ['list'],
