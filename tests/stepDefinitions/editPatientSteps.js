@@ -25,7 +25,7 @@ Given('Create a new Patient with below details', async ({editPatientFixture}, da
 });
 
 When('User search and clicks Edit Icon of newly created patient', async ({editPatientFixture}) => {
-   logger.info('User searches and clicks Edit Icon of newly created patient');
+   logger.info('User searches newly created patient with contact Number and click its Edit Icon');
     await editPatientFixture.searchPatientWithContactNoAndClickEditIcon();
 });
 
@@ -36,9 +36,9 @@ Then('{string} field should display expected value {string}', async ({editPatien
 });
 
 
-Then('the {string} field should display the placeholder text {string} in the Edit Patient Page', async ({editPatientFixture}, vitalField, placeholderText) => {
+Then('the {string} field should display the placeholder text {string} in the Edit Patient Page', async ({editPatientFixture}, field, placeholderText) => {
    logger.info("Verifying Vital Field Placeholder displayed...");
-   const actualPlaceholder = await editPatientFixture.verifyPlaceholderDetail(vitalField);
+   const actualPlaceholder = await editPatientFixture.verifyPlaceholderDetail(field);
     expect(actualPlaceholder).toBe(placeholderText);
     logger.info(`"${vitalField}" placeholder correctly displays: "${actualPlaceholder}"`);
 
@@ -49,5 +49,10 @@ Then('the Vitals section {string} field should NOT display a mandatory indicator
   logger.info("Verifying Mandatory * indicator in fields of Vital Section Fields Placeholder...");
    const hasMandatoryIndicator = await editPatientFixture.isMandatoryIndicatorPresent(vitalField);
    expect(hasMandatoryIndicator).toBe(false);
+});
+
+When('User deletes the existing {string} field data', async ({editPatientFixture}, Field) => {
+   logger.info(`User deletes the ${Field} field data...`);
+   await editPatientFixture.deleteFieldText(Field); 
 });
 

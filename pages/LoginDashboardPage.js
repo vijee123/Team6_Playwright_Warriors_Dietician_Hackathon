@@ -1,5 +1,5 @@
 // pages/LoginPage.js
-const { expect } = require('@playwright/test');
+//const { expect } = require('@playwright/test');
 const xlsx = require('xlsx');
 
 class LoginPage {
@@ -90,4 +90,5 @@ class DashboardPage {
     }
 }
 
-module.exports = { LoginDashboardPage };
+module.exports = { LoginPage, DashboardPage };
+// { LoginDashboardPage };
