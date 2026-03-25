@@ -1,52 +1,42 @@
-export default class chainingData{
+export default class chainingData {
 
-constructor(page) {
-    this.page = page;
-    this.patientData = {
-      firstName  : '',
-      lastName   : '',
-      email      : '',
-      contactNo  : '',
-    };
+  static patientFirstName = '';
+  static patientLastName = '';
+  static patientEmail = '';
+  static patientContactNo = '';
+
+  static setPatientFirstName(fName) {
+    this.patientFirstName = fName;
   }
 
-
-    set patientFirstName(value) {
-    this.patientData.firstName = value;
+  static setPatientLastName(lName) {
+    this.patientLastName = lName;
   }
 
-  set patientLastName(value) {
-    this.patientData.lastName = value;
+  static setPatientEmail(email) {
+    this.patientEmail = email;
+   }
+
+  static setPatientContactNo(num) {
+    this.patientContactNo = num;
+   }
+
+  static getPatientFirstName() {
+    return this.patientFirstName;
   }
 
-  set patientEmail(value) {
-    this.patientData.email = value;
+  static getPatientLastName() {
+    return this.patientLastName;
   }
 
-  set patientContactNo(value) {
-    this.patientData.contactNo = value;
+  static getPatientEmail() {
+    return this.patientEmail;
   }
 
-  get patientFirstName() {
-    return this.patientData.firstName;
+  static getPatientContactNo() {
+    return this.patientContactNo;
   }
-
-  get patientLastName() {
-    return this.patientData.lastName;
-  }
-
-  get patientEmail() {
-    return this.patientData.email;
-  }
-
-  get patientContactNo() {
-    return this.patientData.contactNo;
-  }
-
-  // get patientData() {
-  //   return this.patientData;
-  // }
-
-
 
 }
+
+

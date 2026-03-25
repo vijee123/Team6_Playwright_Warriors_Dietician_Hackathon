@@ -9,7 +9,6 @@ export default class EditPatientPage{
     this.page = page;
 
 
-    this.chainData = new chainingData();
     this.commons = new commonMethods(page);
 
     //------------------------WebElement  Locators----------------------
@@ -135,9 +134,15 @@ export default class EditPatientPage{
 
 
   async createPatient(data) {
-   // this.createdPatient = data;
     const uniqueEmail     = this.commons.generateRandomEmail(data['Last Name']);  
     const uniqueContactNo = this.commons.generateContactNo();
+
+    chainingData.setPatientEmail(uniqueEmail);
+    chainingData.setPatientContactNo(uniqueContactNo);
+    chainingData.setPatientFirstName(data['First Name']);
+    chainingData.setPatientLastName(data['Last Name']);   
+    console.log(`The email generated is: ${chainingData.getPatientEmail()}`);
+    console.log(`The contact Num generated is: ${chainingData.getPatientContactNo()}`);
 
     await this.firstName.fill(data['First Name']);
     await this.lastName.fill(data['Last Name']);
@@ -148,12 +153,6 @@ export default class EditPatientPage{
     await this.selectDropdownOption(this.cuisineDropdown,  data['Cuisine Category']);
     await this.dobField.fill(data['Date of Birth']);
     await this.submitBtn.click();
-
-    this.chainData.patientFirstName = data['First Name'];
-    this.chainData.patientLastName  = data['Last Name'];
-    this.chainData.patientEmail     = uniqueEmail;
-    this.chainData.patientContactNo = uniqueContactNo;
-
   }
 
 
