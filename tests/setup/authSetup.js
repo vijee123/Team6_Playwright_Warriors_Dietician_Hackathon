@@ -4,7 +4,7 @@ import LoginPage from '../../pages/loginPage.js'
 setup('authenticate', async ({ page }) => {
 //  try{
     const loginPage = new LoginPage(page);
-    await loginPage.navigateToUrl();
+    await loginPage.goto();
    // await loginPage.fillUsernamePwd(process.env.username, process.env.password);
    // await loginPage.clickLoginBtn();
     console.log('Saved Auth session....');

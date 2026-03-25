@@ -7,9 +7,7 @@ export default class EditPatientPage{
 
     if(!page) throw new Error ('Page undefined..');
     this.page = page;
-
-
-    this.commons = new commonMethods(page);
+    //this.commons = new commonMethods(page);
 
     //------------------------WebElement  Locators----------------------
     this.pageTitle = this.page.getByText('Edit Patient Details');
@@ -90,9 +88,23 @@ export default class EditPatientPage{
     return await locator.isVisible();
   }
 
-  async verifyPlaceholderDetail(vitalField) {
+  async deleteFieldText(field){
+    switch(field){
+          case "First Name":
+          await commonMethods.clearTextBox(this.firstName);break;
+          case "Last Name":
+          await commonMethods.clearTextBox(this.lastName);break;
+          case "Email":
+          await commonMethods.clearTextBox(this.email);break;
+          case "Contact Number":
+          await commonMethods.clearTextBox(this.contactNo);break;
+     }
+
+  }
+
+  async verifyPlaceholderDetail(Field) {
   let locator;
-  switch (vitalField) {
+  switch (Field) {
     case 'SP':
       locator = this.spField; break;
     case 'DP':
@@ -103,6 +115,14 @@ export default class EditPatientPage{
       locator = this.heightField; break;
     case 'Temperature':
       locator = this.temperatureField; break;
+    case 'First Name':
+      locator = this.firstName; break;
+    case 'Last Name':
+      locator = this.lastName; break;
+    case 'Email':
+      locator = this.email; break;
+    case 'Contact Number':
+      locator = this.contactNo; break;
     default:
       throw new Error('Unknown Vital field ....');
    }
@@ -134,8 +154,8 @@ export default class EditPatientPage{
 
 
   async createPatient(data) {
-    const uniqueEmail     = this.commons.generateRandomEmail(data['Last Name']);  
-    const uniqueContactNo = this.commons.generateContactNo();
+    const uniqueEmail     = commonMethods.generateRandomEmail(data['Last Name']);  
+    const uniqueContactNo = commonMethods.generateContactNo();
 
     chainingData.setPatientEmail(uniqueEmail);
     chainingData.setPatientContactNo(uniqueContactNo);

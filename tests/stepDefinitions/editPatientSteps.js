@@ -1,7 +1,6 @@
 import { logger } from '../utils/logger.js';
 import{test} from '../fixtures/customFixtures.js';
 import { createBdd } from 'playwright-bdd';
-import chainingData from '../utils/chainingData.js';
 
 const { Given, When, Then } = createBdd(test);
 
@@ -37,9 +36,9 @@ Then('{string} field should display expected value {string}', async ({editPatien
 });
 
 
-Then('the {string} field should display the placeholder text {string} in the Edit Patient Page', async ({editPatientFixture}, vitalField, placeholderText) => {
+Then('the {string} field should display the placeholder text {string} in the Edit Patient Page', async ({editPatientFixture}, field, placeholderText) => {
    logger.info("Verifying Vital Field Placeholder displayed...");
-   const actualPlaceholder = await editPatientFixture.verifyPlaceholderDetail(vitalField);
+   const actualPlaceholder = await editPatientFixture.verifyPlaceholderDetail(field);
     expect(actualPlaceholder).toBe(placeholderText);
     logger.info(`"${vitalField}" placeholder correctly displays: "${actualPlaceholder}"`);
 
@@ -50,5 +49,10 @@ Then('the Vitals section {string} field should NOT display a mandatory indicator
   logger.info("Verifying Mandatory * indicator in fields of Vital Section Fields Placeholder...");
    const hasMandatoryIndicator = await editPatientFixture.isMandatoryIndicatorPresent(vitalField);
    expect(hasMandatoryIndicator).toBe(false);
+});
+
+When('User deletes the existing {string} field data', async ({editPatientFixture}, Field) => {
+   logger.info(`User deletes the ${Field} field data...`);
+   await editPatientFixture.deleteFieldText(Field); 
 });
 

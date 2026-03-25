@@ -1,26 +1,28 @@
 import{test as base} from 'playwright-bdd';
-import LoginPage from '../../pages/loginPage.js';
+import LoginPage from '../../pages/loginPage.js'
+import DashboardPage from '../../pages/DashboardPage.js';
 import EditPatientPage from '../../pages/editPatientPage.js';
 
 
 export const test = base.extend({
 
-    // Add Login fixture 
+    // Login fixture 
     loginPageFixture:async({page},use)=>{
         console.log("Inside the loginPage Fixture");
         const loginPage = new LoginPage(page);
-        await loginPage.navigateToUrl();
+        await loginPage.goto();
         await use(loginPage);
     },
 
-    // Add Dashboard fixture
+    // Dashboard fixture
         dashboardPageFixture:async({page},use)=>{
         console.log("Using the Dashboard Fixture");
-        const dashboardPage = new EditPatientPage(page);
-        await this.page.goto('/dashboardPatients');
+        const dashboardPage = new DashboardPage(page);
+        await dashboardPage.goto('/dashboardPatients');
         await use(dashboardPage);
     },
 
+  
     // editPatient fixture
     editPatientFixture:async({page},use)=>{
           console.log("Inside the editPatientPage Fixture");
@@ -28,10 +30,8 @@ export const test = base.extend({
           await editPatientPage.navigateToUrl();
           await use(editPatientPage);       
     }
+   
 
-    
-
-    
 
 
 });
