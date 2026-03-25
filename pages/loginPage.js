@@ -3,9 +3,9 @@ export default class LoginPage{
     constructor(page){
        if (!page) throw new Error("Page object is undefined!");
        this.page = page;
-       this.userName = this.page.locator('');
-       this.password = this.page.locator('');
-       this.loginBtn = this.page.locator('');
+       this.userName = this.page.locator('input[placeholder="Username"]');
+       this.password = this.page.locator('input[placeholder="Password"]');
+       this.loginBtn = this.page.getByRole('button', { name: 'Login' });
     }
 
     

@@ -14,11 +14,12 @@ export const test = base.extend({
     },
 
     // Add Dashboard fixture
-    // dashboardPageFixture:async({page},use)=>{
-    //     console.log("Using the Dashboard Fixture");
-    //     const dashboardPage = new DashboardPage(page);
-    //     await use(dashboardPage);
-    // },
+        dashboardPageFixture:async({page},use)=>{
+        console.log("Using the Dashboard Fixture");
+        const dashboardPage = new EditPatientPage(page);
+        await this.page.goto('/dashboardPatients');
+        await use(dashboardPage);
+    },
 
     // editPatient fixture
     editPatientFixture:async({page},use)=>{

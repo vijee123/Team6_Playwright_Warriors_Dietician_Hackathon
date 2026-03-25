@@ -157,10 +157,9 @@ export default class EditPatientPage{
 
 
  async searchPatientWithContactNoAndClickEditIcon() {
-  //const contactNo = this.createdPatient['Contact Number'];
-  const contactNo = this.chainData.patientContactNo;
+  const contactNo = chainingData.getPatientContactNo();
+  console.log(`Searching for patient with Contact No: ${chainingData.getPatientContactNo()}`);
   await this.searchBox.fill(contactNo);
-  await this.page.waitForTimeout(500);
   await this.clickTopEditIcon();
   await this.page.locator('[role="dialog"]').waitFor({ state: 'visible' });
 }

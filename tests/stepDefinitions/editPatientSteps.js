@@ -1,6 +1,7 @@
 import { logger } from '../utils/logger.js';
 import{test} from '../fixtures/customFixtures.js';
 import { createBdd } from 'playwright-bdd';
+import chainingData from '../utils/chainingData.js';
 
 const { Given, When, Then } = createBdd(test);
 
@@ -25,7 +26,7 @@ Given('Create a new Patient with below details', async ({editPatientFixture}, da
 });
 
 When('User search and clicks Edit Icon of newly created patient', async ({editPatientFixture}) => {
-   logger.info('User searches and clicks Edit Icon of newly created patient');
+   logger.info('User searches newly created patient with contact Number and click its Edit Icon');
     await editPatientFixture.searchPatientWithContactNoAndClickEditIcon();
 });
 

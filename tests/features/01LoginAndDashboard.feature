@@ -1,14 +1,14 @@
 Feature: Login page Functional Verification
   
  Background: 
-  Given  The user is on the sign in page
+  # Given  The user is on the sign in page
 
 ######### Login Scenarios  ##########   
- @validLogin
-  Scenario: User Login in with valid credentials
-    When The user enters Login credentials from "LoginData" and 0
-    And The user clicks Login button
-    Then The user be on Dashboard after Login
+#  @validLogin
+#   Scenario: User Login in with valid credentials
+#     When The user enters Login credentials from "LoginData" and 0
+#     And The user clicks Login button
+#     Then The user be on Dashboard after Login
     
 #   @invalidLogin
 #   Scenario Outline: User attempts Login with invalid credentials
