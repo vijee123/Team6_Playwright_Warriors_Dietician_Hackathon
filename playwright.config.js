@@ -4,7 +4,7 @@ import { defineBddConfig } from 'playwright-bdd';
 import dotenv from 'dotenv';
 
 const testDir = defineBddConfig({
-  features: 'tests/features/**/05EditPatient.feature',
+  features: 'tests/features/**/*.feature',
   steps: [
     'tests/stepDefinitions/**/*.js',
     'tests/fixtures/**/*.js',
@@ -23,7 +23,12 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 2 : 2,
+
+  // grep: /@smoke/,   
+  // grepInvert: /@regression/, 
+
   reporter: [
+    ['html'],
     ['list'],
     ['allure-playwright', {
       outputFolder: 'allure-results',  
@@ -44,9 +49,8 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
 
-    // Runs this first to save storageStateSession details to user.json
-    {
-      
+    // // Runs this first to save storageStateSession details to user.json
+    {      
       name: 'setup',
       testDir: 'tests/setup',
       testMatch: ['authSetup.js'],
@@ -66,7 +70,7 @@ export default defineConfig({
         storageState: 'auth/user.json',
        },
       testMatch: '**/.features-gen/**/*.spec.js',
-      dependencies: ['setup'],
+     // dependencies: ['setup'],
     },
 
 

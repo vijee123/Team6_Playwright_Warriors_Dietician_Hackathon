@@ -24,7 +24,7 @@ export const test = base.extend({
     editPatientFixture:async({page},use)=>{
           console.log("Inside the editPatientPage Fixture");
           const editPatientPage = new EditPatientPage(page);
-          await editPatientPage.navigateToUrl('/readpatients');
+          await editPatientPage.navigateToUrl();
           await use(editPatientPage);       
     }
 
