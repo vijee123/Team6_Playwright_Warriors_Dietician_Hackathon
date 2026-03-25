@@ -1,4 +1,3 @@
-// @ts-check
 import { defineConfig, devices } from '@playwright/test';
 import { defineBddConfig } from 'playwright-bdd';
 import dotenv from 'dotenv';
@@ -24,16 +23,16 @@ const testDir = defineBddConfig({
  */
 export default defineConfig({
   testDir,
-  /* Run tests in files in parallel */
-  fullyParallel: false,
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
+  fullyParallel: true,
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 2 : 2,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+  workers: process.env.CI ? 3 : 3,
+
+  // grep: /@smoke/,   
+  // grepInvert: /@regression/, 
   reporter: [
+    ['html'],
     ['list'],
     ['allure-playwright', {
       outputFolder: 'allure-results',  // MUST match Jenkins results path
@@ -58,8 +57,7 @@ export default defineConfig({
   projects: [
 
     // Runs this first to save storageStateSession details to user.json
-    {
-      
+    {      
       name: 'setup',
       testDir: 'tests/setup',
       testMatch: ['authSetup.js'],
@@ -72,6 +70,18 @@ export default defineConfig({
       testMatch: '**/.features-gen/**/01Login.feature.spec.js',
     },
 
+    {
+      name: 'login-firefox',
+      use: { ...devices['Desktop Firefox'] },
+      testMatch: '**/.features-gen/**/01Login.feature.spec.js',
+    },
+
+    {
+      name: 'login-webkit',
+      use: { ...devices['Desktop Safari'] },
+      testMatch: '**/.features-gen/**/01Login.feature.spec.js',
+    },
+
     //To use storage state in all other features tests 
     {
       name: 'features-using-storageState-Chromium',
@@ -79,24 +89,29 @@ export default defineConfig({
         storageState: 'auth/user.json',
        },
       testMatch: '**/.features-gen/**/*.spec.js',
-      dependencies: ['setup'],
+     // dependencies: ['setup'],
     },
 
+     {
+      name: 'features-firefox',
+      use: {
+        ...devices['Desktop Firefox'],
+        storageState: 'auth/user.json',
+      },
+      testMatch: '**/.features-gen/**/*.spec.js',
+      //dependencies: ['setup'],
+    },
 
-    // {
-    //   name: 'chromium',
-    //   use: { ...devices['Desktop Chrome'] },
-    // },
+    {
+      name: 'features-webkit',
+      use: {
+        ...devices['Desktop Safari'],
+        storageState: 'auth/user.json',
+      },
+      testMatch: '**/.features-gen/**/*.spec.js',
+      //dependencies: ['setup'], 
+    },
 
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
 
     /* Test against mobile viewports. */
     // {
