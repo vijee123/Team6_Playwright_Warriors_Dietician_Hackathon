@@ -1,39 +1,31 @@
-import { expect } from '@playwright/test';
+import { logger } from '../utils/logger.js';
+import{test} from '../fixtures/customFixtures.js';
 import { createBdd } from 'playwright-bdd';
 
 const { Given, When, Then } = createBdd(test);
 
-
 // filename: steps/login.steps.js
-const { expect } = require('@playwright/test');
-const { LoginPage } = require('../pages/LoginDashboardPage');
-const { DashboardPage } = require('../pages/DashboardPage');
+//const { LoginPage } = require('../pages/LoginPage');
+//const { DashboardPage } = require('../pages/DashboardPage');
 
-// Page object instances
-let loginPage;
-let dashboardPage;
 
-Given('The user is on the sign in page', async function () {
-    loginPage = new LoginPage(this.page);  // assuming this.page is Playwright page from World
-    await loginPage.goto();
-});
 
-When('The user enters Login credentials from {string} and {int}', async function (sheetName, rowIndex) {
+When('The user enters Login credentials from {string} and {int}', async function (loginPageFixture,sheetName, rowIndex) {
     const credentials = loginPage.getCredentialsFromExcel(sheetName, rowIndex);
-    await loginPage.enterUsername(credentials.username);
-    await loginPage.enterPassword(credentials.password);
+    await loginPageFixture.enterUsername(credentials.username);
+    await loginPageFixture.enterPassword(credentials.password);
 });
 
-When('The user enters Login username {string}', async function (username) {
-    await loginPage.enterUsername(username);
+When('The user enters Login username {string}', async function (loginPageFixture, username) {
+    await loginPageFixture.enterUsername(username);
 });
 
-When('The user enters Login password {string}', async function (password) {
-    await loginPage.enterPassword(password);
+When('The user enters Login password {string}', async function (loginPageFixture, password) {
+    await loginPageFixture.enterPassword(password);
 });
 
-When('The user clicks Login button', async function () {
-    await loginPage.clickLogin();
+When('The user clicks Login button', async function (loginPageFixture) {
+    await loginPageFixture.clickLogin();
 });
 
 Then('The user be on Dashboard after Login', async function () {

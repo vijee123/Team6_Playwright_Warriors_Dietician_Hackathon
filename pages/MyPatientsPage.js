@@ -24,14 +24,14 @@ class MyPatientsPage {
         this.actions = ['View Previous Test Reports', 'View Previous Diet Plans', 'Create New Report/plan'];
     }
 
-    // Login / Dashboard utility 
+      // Login / Dashboard utility 
     async loginWithValidCredentials() {
         // Implement login here if needed
         // Or call shared AuthPages login method
     }
 
     async gotoDashboard() {
-        await this.page.goto('https://www.dietician.com/dashboard'); // replace URL
+        await this.page.goto('/dashboard'); // replace URL
     }
 
     async clickMyPatientsNav() {
