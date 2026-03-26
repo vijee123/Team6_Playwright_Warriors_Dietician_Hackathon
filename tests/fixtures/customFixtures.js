@@ -6,6 +6,7 @@ import MyPatientsPage from '../../pages/MyPatientsPage.js';
 import DeletePatientPopupPage from '../../pages/deletePatientPopupPage.js';
 
 export const test = base.extend({
+  
     // Login fixture 
     loginPageFixture:async({page},use)=>{
         console.log("Inside the loginPage Fixture");
@@ -13,7 +14,8 @@ export const test = base.extend({
         await loginPage.goto();
         await use(loginPage);
     },
-
+  
+  
     // Dashboard fixture
      dashboardPageFixture:async({page},use)=>{
         console.log("Using the Dashboard Fixture");
@@ -55,5 +57,7 @@ export const test = base.extend({
     //     await use(viewTestReportPage);
 
     
+
 });
+
 

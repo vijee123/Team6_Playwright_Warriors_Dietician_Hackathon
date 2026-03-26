@@ -1,58 +1,54 @@
-import { expect } from '@playwright/test';
+import { MyPatientsPage } from '../../pages/MyPatientsPage';
+import{test} from '../fixtures/customFixtures.js';
 import { createBdd } from 'playwright-bdd';
-
-const { Given, When, Then } = createBdd();
-const { MyPatientsPage } = require('../pages/MyPatientsPage');
+const { Given, When, Then } = createBdd(test);
 
 
-let myPatientsPage;
-
-Given('User is logged into the application', async function () {
+Given('User is logged into the application', async function (myPatientPageFixture) {
     // Assuming login steps are handled in a common page object
-    myPatientsPage = new MyPatientsPage(this.page);
-    await myPatientsPage.loginWithValidCredentials(); 
+       await myPatientPageFixture.loginWithValidCredentials(); 
 });
 
-Given('User is in dietician application dashboard page', async function () {
-    await myPatientsPage.gotoDashboard();
+Given('User is in dietician application dashboard page', async function (myPatientPageFixture) {
+    await myPatientPageFixture.gotoDashboard();
 });
 
-When('User clicks on My Patients button', async function () {
-    await myPatientsPage.clickMyPatientsNav();
+When('User clicks on My Patients button', async function (myPatientPageFixture) {
+    await myPatientPageFixture.clickMyPatientsNav();
 });
 
 Then('Page header {string} should be displayed', async function (headerText) {
-    await expect(myPatientsPage.pageHeader).toHaveText(headerText);
+    await expect(myPatientPageFixture.pageHeader).toHaveText(headerText);
 });
 
 Then('Search bar should be displayed', async function () {
-    await expect(myPatientsPage.searchInput).toBeVisible();
+    await expect(myPatientPageFixture.searchInput).toBeVisible();
 });
 
-Then('Search icon should be displayed inside the search bar', async function () {
-    await expect(myPatientsPage.searchIcon).toBeVisible();
+Then('Search icon should be displayed inside the search bar', async function (myPatientPageFixture) {
+    await expect(myPatientPageFixture.searchIcon).toBeVisible();
 });
 
-Then('Placeholder text {string} should be displayed', async function (placeholder) {
-    expect(await myPatientsPage.searchInput.getAttribute('placeholder')).toBe(placeholder);
+Then('Placeholder text {string} should be displayed', async function (myPatientPageFixture, placeholder) {
+    expect(await myPatientPageFixture.searchInput.getAttribute('placeholder')).toBe(placeholder);
 });
 
-Then('following table headers should be displayed', async function (dataTable) {
+Then('following table headers should be displayed', async function (myPatientPageFixture, dataTable) {
     const headers = dataTable.raw().flat();
     for (const header of headers) {
-        await expect(myPatientsPage.getTableHeader(header)).toBeVisible();
+        await expect(myPatientPageFixture.getTableHeader(header)).toBeVisible();
     }
 });
 
-Then('following columns should have sorting icons', async function (dataTable) {
+Then('following columns should have sorting icons', async function (myPatientPageFixture, dataTable) {
     const columns = dataTable.raw().flat();
     for (const col of columns) {
-        await expect(myPatientsPage.getSortIcon(col)).toBeVisible();
+        await expect(myPatientPageFixture.getSortIcon(col)).toBeVisible();
     }
 });
 
 Then('All columns should have values', async function () {
-    const allRows = await myPatientsPage.getAllTableRows();
+    const allRows = await myPatientPageFixture.getAllTableRows();
     for (const row of allRows) {
         for (const cell of row.cells) {
             expect(cell).not.toBe('');
@@ -60,9 +56,9 @@ Then('All columns should have values', async function () {
     }
 });
 
-Then('each patient record should contain', async function (dataTable) {
+Then('each patient record should contain', async function (myPatientPageFixture, dataTable) {
     const fields = dataTable.raw().flat();
-    const rows = await myPatientsPage.getAllTableRows();
+    const rows = await myPatientPageFixture.getAllTableRows();
     for (const row of rows) {
         for (const field of fields) {
             expect(row[field]).not.toBe('');
@@ -70,9 +66,9 @@ Then('each patient record should contain', async function (dataTable) {
     }
 });
 
-Then('Details column should display following for each patient', async function (dataTable) {
+Then('Details column should display following for each patient', async function (myPatientPageFixture, dataTable) {
     const fields = dataTable.raw().flat();
-    const rows = await myPatientsPage.getAllTableRows();
+    const rows = await myPatientPageFixture.getAllTableRows();
     for (const row of rows) {
         for (const field of fields) {
             expect(row.details[field]).not.toBe('');
@@ -81,14 +77,14 @@ Then('Details column should display following for each patient', async function 
 });
 
 Then('Details should be displayed in multiline format', async function () {
-    const rows = await myPatientsPage.getAllTableRows();
+    const rows = await myPatientPageFixture.getAllTableRows();
     for (const row of rows) {
         expect(row.detailsText.includes('\n')).toBe(true);
     }
 });
 
-Then('{string} should be displayed in {string} format for each patient record', async function (field, format) {
-    const rows = await myPatientsPage.getAllTableRows();
+Then('{string} should be displayed in {string} format for each patient record', async function (myPatientPageFixture,field, format) {
+    const rows = await myPatientPageFixture.getAllTableRows();
     for (const row of rows) {
         const value = row.details[field] || row[field];
         switch (format) {
@@ -109,29 +105,29 @@ Then('{string} should be displayed in {string} format for each patient record', 
 
 Then('following actions should be available for each patient', async function (dataTable) {
     const actions = dataTable.raw().flat();
-    const rows = await myPatientsPage.getAllTableRows();
+    const rows = await myPatientPageFixture.getAllTableRows();
     for (const row of rows) {
         for (const action of actions) {
-            expect(await myPatientsPage.getActionButton(row.id, action)).toBeVisible();
+            expect(await myPatientPageFixture.getActionButton(row.id, action)).toBeVisible();
         }
     }
 });
 
-Then('Edit icon should be displayed for each patient record', async function () {
-    const rows = await myPatientsPage.getAllTableRows();
+Then('Edit icon should be displayed for each patient record', async function (myPatientPageFixture) {
+    const rows = await myPatientPageFixture.getAllTableRows();
     for (const row of rows) {
-        expect(await myPatientsPage.getEditIcon(row.id)).toBeVisible();
+        expect(await myPatientPageFixture.getEditIcon(row.id)).toBeVisible();
     }
 });
 
-Then('Delete icon should be displayed for each patient record', async function () {
-    const rows = await myPatientsPage.getAllTableRows();
+Then('Delete icon should be displayed for each patient record', async function (myPatientPageFixture) {
+    const rows = await myPatientPageFixture.getAllTableRows();
     for (const row of rows) {
-        expect(await myPatientsPage.getDeleteIcon(row.id)).toBeVisible();
+        expect(await myPatientPageFixture.getDeleteIcon(row.id)).toBeVisible();
     }
 });
 
-Given('User logged into the application without patient records', async function () {
+Given('User logged into the application without patient records', async function (myPatientPageFixture) {
     myPatientsPage = new MyPatientsPage(this.page);
     await myPatientsPage.loginWithValidCredentials();
     await myPatientsPage.clearPatientRecords(); // to remove all records for empty state test
