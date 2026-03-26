@@ -129,67 +129,67 @@ Then('Delete icon should be displayed for each patient record', async function (
 
 Given('User logged into the application without patient records', async function (myPatientPageFixture) {
     myPatientsPage = new MyPatientsPage(this.page);
-    await myPatientsPage.loginWithValidCredentials();
-    await myPatientsPage.clearPatientRecords(); // to remove all records for empty state test
+    await myPatientPageFixture.loginWithValidCredentials();
+    await myPatientPageFixture.clearPatientRecords(); // to remove all records for empty state test
 });
 
-Then('My Patients page should display empty table', async function () {
-    expect(await myPatientsPage.isTableEmpty()).toBe(true);
+Then('My Patients page should display empty table', async function (myPatientPageFixture) {
+    expect(await myPatientPageFixture.isTableEmpty()).toBe(true);
 });
 
-Given('User is in My Patients page', async function () {
-    await myPatientsPage.gotoMyPatients();
+Given('User is in My Patients page', async function (myPatientPageFixture) {
+    await myPatientPageFixture.gotoMyPatients();
 });
 
-When('User clicks {string} arrow on {string} column', async function (direction, column) {
-    await myPatientsPage.sortColumn(column, direction);
+When('User clicks {string} arrow on {string} column', async function (myPatientPageFixture, direction, column) {
+    await myPatientPageFixture.sortColumn(column, direction);
 });
 
-Then('Patient records should be sorted in {string} order by {string}', async function (order, column) {
-    const values = await myPatientsPage.getColumnValues(column);
+Then('Patient records should be sorted in {string} order by {string}', async function (myPatientPageFixture, order, column) {
+    const values = await myPatientPageFixture.getColumnValues(column);
     const sortedValues = [...values].sort();
     if (order === 'descending') sortedValues.reverse();
     expect(values).toEqual(sortedValues);
 });
 
-When('User searches using {string}', async function (criteria) {
-    await myPatientsPage.searchPatient(criteria);
+When('User searches using {string}', async function (myPatientPageFixture, criteria) {
+    await myPatientPageFixture.searchPatient(criteria);
 });
 
-Then('Matching patient details should be displayed', async function () {
-    const results = await myPatientsPage.getAllTableRows();
+Then('Matching patient details should be displayed', async function (myPatientPageFixture) {
+    const results = await myPatientPageFixture.getAllTableRows();
     expect(results.length).toBeGreaterThan(0);
 });
 
-When('User clears the search text', async function () {
-    await myPatientsPage.clearSearch();
+When('User clears the search text', async function (myPatientPageFixture) {
+    await myPatientPageFixture.clearSearch();
 });
 
-Then('All patient records should be displayed again', async function () {
-    const allRows = await myPatientsPage.getAllTableRows();
+Then('All patient records should be displayed again', async function (myPatientPageFixture) {
+    const allRows = await myPatientPageFixture.getAllTableRows();
     expect(allRows.length).toBeGreaterThan(0);
 });
 
-Given('User is in {string} of My Patients page', async function (pagePosition) {
-    await myPatientsPage.goToPagePosition(pagePosition);
+Given('User is in {string} of My Patients page', async function (myPatientPageFixture, pagePosition) {
+    await myPatientPageFixture.goToPagePosition(pagePosition);
 });
 
-When('User clicks {string} arrow', async function (action) {
-    await myPatientsPage.clickPaginationArrow(action);
+When('User clicks {string} arrow', async function (myPatientPageFixture, action) {
+    await myPatientPageFixture.clickPaginationArrow(action);
 });
 
-Then('{string} should be displayed', async function (expectedResult) {
-    expect(await myPatientsPage.verifyPaginationResult(expectedResult)).toBe(true);
+Then('{string} should be displayed', async function (myPatientPageFixture, expectedResult) {
+    expect(await myPatientPageFixture.verifyPaginationResult(expectedResult)).toBe(true);
 });
 
-Then('Pagination text should display correct range and total number of patients', async function () {
-    expect(await myPatientsPage.verifyPaginationText()).toBe(true);
+Then('Pagination text should display correct range and total number of patients', async function (myPatientPageFixture) {
+    expect(await myPatientPageFixture.verifyPaginationText()).toBe(true);
 });
 
-Then('Pagination controls should be displayed', async function () {
-    expect(await myPatientsPage.arePaginationControlsVisible()).toBe(true);
+Then('Pagination controls should be displayed', async function (myPatientPageFixture) {
+    expect(await myPatientPageFixture.arePaginationControlsVisible()).toBe(true);
 });
 
-Then('{string} should be {string}', async function (arrow, state) {
-    expect(await myPatientsPage.getPaginationArrowState(arrow)).toBe(state);
+Then('{string} should be {string}', async function (myPatientPageFixture, arrow, state) {
+    expect(await myPatientPageFixture.getPaginationArrowState(arrow)).toBe(state);
 });
