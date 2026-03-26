@@ -2,6 +2,7 @@ import{test as base} from 'playwright-bdd';
 import LoginPage from '../../pages/loginPage.js'
 import DashboardPage from '../../pages/DashboardPage.js';
 import EditPatientPage from '../../pages/editPatientPage.js';
+import DeletePatientPopupPage from '../../pages/deletePatientPopupPage.js';
 
 
 export const test = base.extend({
@@ -29,6 +30,15 @@ export const test = base.extend({
           const editPatientPage = new EditPatientPage(page);
           await editPatientPage.navigateToUrl();
           await use(editPatientPage);       
+    },
+
+
+    // DeletePatient fixture
+     deletePatientFixture:async({page},use)=>{
+          console.log("Inside the editPatientPage Fixture");
+          const deletePatientPage = new DeletePatientPopupPage(page);
+          await deletePatientPage.navigateToUrl();
+          await use(deletePatientPage);       
     }
    
 
