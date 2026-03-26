@@ -16,6 +16,7 @@ export default class DeletePatientPopupPage{
         this.myPatientsPageTitle = this.page.getByText('My Patients');
         this.successMessage = this.page.getByText('Success');
         this.searchBox  = this.page.getByPlaceholder('Search...');
+        this.tableRows = page.locator('//table//tbody//tr');
     }
 
 
@@ -83,6 +84,19 @@ export default class DeletePatientPopupPage{
         }
 
         return actualValue;
+    }
+
+
+    async isPatientPresentInTable() {
+        const contactNo = chainingData.getPatientContactNo();
+        if (!contactNo) {
+        throw new Error('No contact number retrieved from chaining data. Ensure a patient was created/read before this step.');
+        } 
+        await this.searchBox.fill(contactNo);
+        const rowCount = await this.tableRows.count();
+        console.log(`Rows found in search after delete: ${rowCount}`);
+
+        return rowCount > 0;
     }
 
 

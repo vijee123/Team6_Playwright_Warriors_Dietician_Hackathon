@@ -1,6 +1,7 @@
 import { logger } from '../utils/logger.js';
 import{test} from '../fixtures/customFixtures.js';
 import { createBdd } from 'playwright-bdd';
+import { expect } from 'allure-playwright';
 
 const { Given, When, Then } = createBdd(test);
 
@@ -35,7 +36,8 @@ When('user clicks the OK button and accepts the alert', async ({deletePatientFix
 
 Then('patient should be removed from the table', async ({deletePatientFixture}) => {
     logger.info('User verifies that patient is removed successfully...');
-
+    const isDeleted = await deletePatientFixture.isPatientPresentInTable();
+    expect(isDeleted).toBe(true);
 });
 
 Then('user should get a success message of delete', async ({deletePatientFixture}) => {
