@@ -22,8 +22,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 3 : 3,
-
-  // grep: /@smoke/,   
+  grep: /@validLogin/,   
   // grepInvert: /@regression/, 
   reporter: [
     ['html'],
