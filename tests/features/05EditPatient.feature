@@ -1,21 +1,5 @@
 Feature: To test the Edit Patient Details page functionality
 
-  #------Verification of Edit Page Elements State and Presence
-  @smoke @regression @editPatientElementsDisplay
-  Scenario Outline: To test the display of Edit Patient page dialog box
-    When User clicks the Edit Icon button of a patient
-    Then User should see the "<element>" in the edit patient page
-
-    Examples:
-      | element                 |
-      | pageTitle               |
-      | submitButtonPresence    |
-      | closeButtonPresence     |
-      | fileUploadOption        |
-      | uploadHealthReportLabel |
-      | noFileChosenText        |
-
-
 
   #------Verification of Edit Page Field Elements Value displayed
   @regression @editPatientFieldValuesDisplay
@@ -98,6 +82,23 @@ Feature: To test the Edit Patient Details page functionality
       | Contact Number | Contact Number  |
 
 
+  #------Verification of Edit Page Elements State and Presence
+  @smoke @regression @editPatientElementsDisplay
+  Scenario Outline: To test the display of Edit Patient page dialog box
+    When User clicks the Top Edit Icon button of a patient table
+    Then User should see the "<element>" in the edit patient page
+
+    Examples:
+      | element                 |
+      | pageTitle               |
+      | submitButtonPresence    |
+      | closeButtonPresence     |
+      | fileUploadOption        |
+      | uploadHealthReportLabel |
+      | noFileChosenText        |
+
+
+
   ##------------Verification of Vitals Section placeholders visibility---------------
   @regression @vitalsPlaceholder
   Scenario Outline: To verify the '<vitalField>' field displays placeholder details when vital data is not given
@@ -110,6 +111,62 @@ Feature: To test the Edit Patient Details page functionality
       | Weight      | Weight          |
       | Height      | Height          |
       | Temperature | Temperature     |
+
+
+
+  #-----------------------Test the Edit patient page TEXT BOX fields update with Valid and Invalid data----------------------
+  @regression @editPatientTextBoxDetails
+  Scenario Outline: Edit the patients page Text boxes with Valid and Invalid details and verify the consequences
+    Given User clicks the Top Edit Icon button of a patient table
+    When User edits text box field with valid or invalid data for the '<scenario>' scenario and submits
+    Then User should get matching error message for the '<scenario>'
+
+    Examples:
+      | scenario                 |
+      | EditFirstNameNumeric     |
+      | EditFirstNameSplChar     |
+      | EditLastNameNumeric      |
+      | EditLastNameSplChar      |
+      | EditEmailInvalid         |
+      | EditEmailWithoutAtSymbol |
+      | EditEmailSplChar         |
+      | EditEmailEmpty           |
+      | EditContactNoAlphabets   |
+      | EditContactNoSplChar     |
+      | EditContactNoLessDigits  |
+      | EditContactNoEmpty       |
+      | EditFirstNameValid       |
+      | EditLastNameValid        |
+      | EditEmailValid           |
+      | EditContactNoValid       |
+
+
+  #-----------------------Test the Edit patient page VITAL fields update with Valid and Invalid data----------------------
+  @regression @editPatientVitalsDetails
+  Scenario Outline: Edit the patients page Vital fields with Valid  Invalid details and verify the consequences
+    Given User clicks the Top Edit Icon button of a patient table
+    When User edits Vital field with Valid or invalid data for the '<scenario>' scenario and submits
+    Then User should get matching error message for the '<scenario>'
+
+    Examples:
+      | scenario                |
+      | EditWeightValid         |
+      | EditOnlySPValid         |
+      | EditOnlyDPValid         |
+      | EditBothSPandDPValid    |
+      | EditHeightValid         |
+      | EditTemperatureValid    |
+      | EditWeightWithAlphabets |
+      | EditWeightWithSpclChar  |
+      | EditHeightWithAlphabets |
+      | EditHeightWithSpclChar  |
+      | EditTempWithAlphabets   |
+      | EditTempWithSpclChar    |
+      | EditSPWithAlphabets     |
+      | EditSPWithSpclChar      |
+      | EditDPWithAlphabets     |
+      | EditDPWithSpclChar      |
+
 
 
 

@@ -1,11 +1,12 @@
 import { logger } from '../utils/logger.js';
 import{test} from '../fixtures/customFixtures.js';
 import { createBdd } from 'playwright-bdd';
+import ExcelUtil from '../utils/ExcelReader.js';
 
 const { Given, When, Then } = createBdd(test);
 
 
-When('User clicks the Edit Icon button of a patient', async ({editPatientFixture}) => {
+When('User clicks the Top Edit Icon button of a patient table', async ({editPatientFixture}) => {
   logger.info('User clicks the Edit Icon button of a patient..');
   await editPatientFixture.clickTopEditIcon();
 });
@@ -54,5 +55,32 @@ Then('the Vitals section {string} field should NOT display a mandatory indicator
 When('User deletes the existing {string} field data', async ({editPatientFixture}, Field) => {
    logger.info(`User deletes the ${Field} field data...`);
    await editPatientFixture.deleteFieldText(Field); 
+});
+
+
+When('User edits text box field with valid or invalid data for the {string} scenario and submits', async ({editPatientFixture}, scenario) => {
+   logger.info(`User edits the Text field with Valid or invalid data for scenario ${scenario} `);
+   const data = ExcelUtil.getRow('editPatient',scenario);
+   await editPatientFixture.editPatientTextBoxWithGivenData(scenario, data);
+   await editPatientFixture.clickSubmit();
+});
+
+When('User edits Vital field with Valid or invalid data for the {string} scenario and submits', async ({editPatientFixture}, scenario) => {
+   logger.info(`User edits the Vital field with Valid or invalid data for scenario ${scenario} `);
+   const data = ExcelUtil.getRow('editPatient',scenario);
+   await editPatientFixture.editPatientVitalsWithGivenData(scenario, data);
+
+});
+
+Then('User should get matching error message for the {string}', async ({editPatientFixture}, scenario) => {
+    logger.info(`Verify the appropriate message displayed for the ${scenario}`)
+    const data = ExcelUtil.getRow('editPatient',scenario);
+     if (data.ExpectedMessage !== 'Valid') {
+        const actualError = await editPatientFixture.getFieldErrorMessage(scenario);
+        expect(actualError).toContain(data.ExpectedMessage);
+    } else {
+        const isPresent = await editPatientFixture.patientsPageVisible();
+        expect(isPresent).toBe(true);
+    }
 });
 
