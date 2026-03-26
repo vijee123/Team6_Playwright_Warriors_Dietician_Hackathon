@@ -4,6 +4,7 @@
   "description": "Team6_Playwright_Warriors_Dietician_Hackathon  in March 2026",
   "main": "index.js",
   "scripts": {
+    "bddgen": "npx bddgen",
     "pretest": "rimraf allure-results allure-report test-results playwright-report",
     "test": "npx playwright test",
     "allure:generate": "npx allure generate allure-results --clean -o allure-report",
