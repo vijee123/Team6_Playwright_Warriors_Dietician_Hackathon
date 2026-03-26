@@ -3,7 +3,10 @@ import { defineBddConfig } from 'playwright-bdd';
 import dotenv from 'dotenv';
 
 const testDir = defineBddConfig({
-  features: 'tests/features/**/05EditPatient.feature',
+  features: [
+    'tests/features/**/05EditPatient.feature',
+    'tests/features/**/06DeletePatient.feature',
+  ],
   steps: [
     'tests/stepDefinitions/**/*.js',
     'tests/fixtures/**/*.js',
@@ -21,9 +24,9 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 3 : 1,
+  workers: process.env.CI ? 3 : 3,
 
-  // grep: /@smoke/,   
+   //grep: /@editPatientVitalsDetails/,   
   // grepInvert: /@regression/, 
   reporter: [
     ['html'],
@@ -61,17 +64,17 @@ export default defineConfig({
       testMatch: '**/.features-gen/**/01Login.feature.spec.js',
     },
 
-    // {
-    //   name: 'login-firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    //   testMatch: '**/.features-gen/**/01Login.feature.spec.js',
-    // },
+    {
+      name: 'login-firefox',
+      use: { ...devices['Desktop Firefox'] },
+      testMatch: '**/.features-gen/**/01Login.feature.spec.js',
+    },
 
-    // {
-    //   name: 'login-webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    //   testMatch: '**/.features-gen/**/01Login.feature.spec.js',
-    // },
+    {
+      name: 'login-webkit',
+      use: { ...devices['Desktop Safari'] },
+      testMatch: '**/.features-gen/**/01Login.feature.spec.js',
+    },
 
     //To use storage state in all other features tests 
     {
@@ -83,25 +86,25 @@ export default defineConfig({
      // dependencies: ['setup'],
     },
 
-    //  {
-    //   name: 'features-firefox',
-    //   use: {
-    //     ...devices['Desktop Firefox'],
-    //     storageState: 'auth/user.json',
-    //   },
-    //   testMatch: '**/.features-gen/**/*.spec.js',
-    //   //dependencies: ['setup'],
-    // },
+     {
+      name: 'features-firefox',
+      use: {
+        ...devices['Desktop Firefox'],
+        storageState: 'auth/user.json',
+      },
+      testMatch: '**/.features-gen/**/*.spec.js',
+      //dependencies: ['setup'],
+    },
 
-    // {
-    //   name: 'features-webkit',
-    //   use: {
-    //     ...devices['Desktop Safari'],
-    //     storageState: 'auth/user.json',
-    //   },
-    //   testMatch: '**/.features-gen/**/*.spec.js',
-    //   //dependencies: ['setup'], 
-    // },
+    {
+      name: 'features-webkit',
+      use: {
+        ...devices['Desktop Safari'],
+        storageState: 'auth/user.json',
+      },
+      testMatch: '**/.features-gen/**/*.spec.js',
+      //dependencies: ['setup'], 
+    },
 
 
     /* Test against mobile viewports. */
