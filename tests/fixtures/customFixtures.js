@@ -37,7 +37,7 @@ export const test = base.extend({
     addPatientFixture: async ({ page }, use) => {
         console.log("Inside the addPatientPage Fixture");
         const addPatientPage = new AddPatientPage(page);
-        await addPatientPage.navigateToAddPatientPage();
+        await addPatientPage.navigateToUrl();
         await use(addPatientPage);
     },
 
