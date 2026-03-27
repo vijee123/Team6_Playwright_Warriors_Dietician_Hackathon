@@ -26,7 +26,7 @@ export default defineConfig({
   workers: process.env.CI ? 3 : 3,
 
    //grep: /@editPatientVitalsDetails/,   
-  // grepInvert: /@regression/, 
+     // grepInvert: /@regression/, 
   reporter: [
     ["html",{ 
       outputFolder: 'playwright-report', open: 'always' }],
