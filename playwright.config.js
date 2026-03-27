@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 const testDir = defineBddConfig({
 
-    features: 'tests/features/**/05EditPatient.feature',
+    features: 'tests/features/**/*.feature',
 
   steps: [
     'tests/stepDefinitions/**/*.js',

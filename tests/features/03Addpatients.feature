@@ -1,8 +1,9 @@
 Feature: Add Patients
 
+  Background:
+     When The user clicks on new patient tab in the header section
+   
   Scenario: User should be able to view the dialog box to add patients
-    Given The user is on the home page
-    When The user clicks on new patient tab in the header section
     Then The user should be able to view the dialog box to add patients
 
   Scenario: Validation of 9 input fields in the add patient dialog box
