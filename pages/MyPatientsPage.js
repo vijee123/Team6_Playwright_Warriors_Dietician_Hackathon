@@ -1,10 +1,7 @@
 const { expect } = require('@playwright/test');
 
 class MyPatientsPage {
-    /**
-     * @param {import('@playwright/test').Page} page
-     */
-    constructor(page) {
+      constructor(page) {
         this.page = page;
 
         // Header & Search 
