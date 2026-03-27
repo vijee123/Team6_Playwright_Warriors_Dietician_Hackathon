@@ -152,7 +152,7 @@ Feature: Add Patients
   Scenario: Select multiple values from Cuisine Category dropdown
     Then user should be able to select multiple values from the dropdown
 
-  Scenario: Selecting date for DOB field
+  Scenario: Selecting date using DatePicker field
     When User clicks on the date picker for DOB field
     Then User should see calender date picker displayed with Month,Day,Year
 

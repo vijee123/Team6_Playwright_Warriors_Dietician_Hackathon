@@ -120,7 +120,7 @@ test.describe('Add Patients', () => {
     await Then('user should be able to select multiple values from the dropdown', null, { page }); 
   });
 
-  test('Selecting date for DOB field', async ({ When, Then, page }) => { 
+  test('Selecting date using DatePicker field', async ({ When, Then, page }) => { 
     await When('User clicks on the date picker for DOB field', null, { page }); 
     await Then('User should see calender date picker displayed with Month,Day,Year', null, { page }); 
   });
