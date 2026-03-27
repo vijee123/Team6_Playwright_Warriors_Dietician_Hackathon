@@ -1,59 +1,55 @@
-# Feature: ViewTest Reports 
+Feature: ViewTest Reports 
 
-#   Background:
-#     Given User is logged into the application
-#     And User is on My Patients page
-#     And Patients already exist
 
-#   #################### Patient Information Section ####################
+  #################### Patient Information Section ####################
 
-#   Scenario: Verify correct report opens for selected record
-#     When User clicks on "View Previous Test Reports" for a specific record
-#     Then Corresponding report for that record should be opened
+  Scenario: Verify correct report opens for selected record
+    When User clicks on "View Previous Test Reports" for a specific record
+    Then Corresponding report for that record should be opened
 
-#   Scenario: Verify patient details in report header
-#     When User clicks on "View Previous Test Reports" for a specific record
-#     Then Title "View Patient Test Reports" should be displayed
-#     And Patient id, name, email and contact number should be displayed
-#     And Close icon "X" should be displayed
+  Scenario: Verify patient details in report header
+    When User clicks on "View Previous Test Reports" for a specific record
+    Then Title "View Patient Test Reports" should be displayed
+    And Patient id, name, email and contact number should be displayed
+    And Close icon "X" should be displayed
 
-#   #################### Reports Table Section ####################
+  #################### Reports Table Section ####################
 
-#   Scenario: Verify reports table and headers
-#     When User clicks on "View Previous Test Reports" for a specific record
-#     Then Reports table should be displayed
-#     And Table headers should be displayed:
-#       | Record Number | File | Uploaded Time | File/Report Name | Vitals | Identified Health Conditions |
+  Scenario: Verify reports table and headers
+    When User clicks on "View Previous Test Reports" for a specific record
+    Then Reports table should be displayed
+    And Table headers should be displayed:
+      | Record Number | File | Uploaded Time | File/Report Name | Vitals | Identified Health Conditions |
 
-#   Scenario: Verify table column order
-#     When User clicks on "View Previous Test Reports" for a specific record
-#     Then Table columns should be in order:
-#       | Record Number | File | Uploaded Time | File/Report Name | Vitals | Identified Health Conditions |
+  Scenario: Verify table column order
+    When User clicks on "View Previous Test Reports" for a specific record
+    Then Table columns should be in order:
+      | Record Number | File | Uploaded Time | File/Report Name | Vitals | Identified Health Conditions |
 
-#   Scenario: Verify pagination controls
-#     When User clicks on "View Previous Test Reports" for a specific record
-#     Then Pagination controls first, previous, next, last should be displayed
+  Scenario: Verify pagination controls
+    When User clicks on "View Previous Test Reports" for a specific record
+    Then Pagination controls first, previous, next, last should be displayed
 
-#   #################### Reports Table Data ####################
+  #################### Reports Table Data ####################
 
-#   Scenario: Verify report row details
-#   When User clicks on "View Previous Test Reports" for a specific record
-#   Then Each report should display:
-#     | Record Number     |
-#     | View PDF button   |
-#     | Uploaded Time     |
-#     | File/Report Name  |
+  Scenario: Verify report row details
+  When User clicks on "View Previous Test Reports" for a specific record
+  Then Each report should display:
+    | Record Number     |
+    | View PDF button   |
+    | Uploaded Time     |
+    | File/Report Name  |
 
-#   Scenario: Verify vitals information
-#     When User clicks on "View Previous Test Reports" for a specific record
-#     Then Each report should display vitals information
-#     And Vitals should be in order Weight -> Height -> Temperature -> SP -> DP
-#     And Vitals should be displayed in multiline format
+  Scenario: Verify vitals information
+    When User clicks on "View Previous Test Reports" for a specific record
+    Then Each report should display vitals information
+    And Vitals should be in order Weight -> Height -> Temperature -> SP -> DP
+    And Vitals should be displayed in multiline format
 
-#   Scenario: Verify health conditions information
-#     When User clicks on "View Previous Test Reports" for a specific record
-#     Then Each report should display identified health conditions
-#     And Health conditions should be displayed in multiline format
+  Scenario: Verify health conditions information
+    When User clicks on "View Previous Test Reports" for a specific record
+    Then Each report should display identified health conditions
+    And Health conditions should be displayed in multiline format
 
 
 #   #################### View PDF ####################
@@ -65,7 +61,6 @@
 
 #   #################### Pagination with Multiple Records ####################
 
-    
 #   Scenario: Navigate to next page
 #     Given User is on View Patient Test Reports page
 #     And Multiple patient records exist
