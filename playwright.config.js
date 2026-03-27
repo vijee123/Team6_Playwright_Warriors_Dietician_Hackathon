@@ -64,17 +64,17 @@ export default defineConfig({
       testMatch: '**/.features-gen/**/01Login.feature.spec.js',
     },
 
-    // {
-    //   name: 'login-firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    //   testMatch: '**/.features-gen/**/01Login.feature.spec.js',
-    // },
+    {
+      name: 'login-firefox',
+      use: { ...devices['Desktop Firefox'] },
+      testMatch: '**/.features-gen/**/01Login.feature.spec.js',
+    },
 
-    // {
-    //   name: 'login-webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    //   testMatch: '**/.features-gen/**/01Login.feature.spec.js',
-    // },
+    {
+      name: 'login-webkit',
+      use: { ...devices['Desktop Safari'] },
+      testMatch: '**/.features-gen/**/01Login.feature.spec.js',
+    },
 
     //To use storage state in all other features tests 
     {
@@ -86,25 +86,25 @@ export default defineConfig({
      // dependencies: ['setup'],
     },
 
-    //  {
-    //   name: 'features-firefox',
-    //   use: {
-    //     ...devices['Desktop Firefox'],
-    //     storageState: 'auth/user.json',
-    //   },
-    //   testMatch: '**/.features-gen/**/*.spec.js',
-    //   //dependencies: ['setup'],
-    // },
+     {
+      name: 'features-firefox',
+      use: {
+        ...devices['Desktop Firefox'],
+        storageState: 'auth/user.json',
+      },
+      testMatch: '**/.features-gen/**/*.spec.js',
+      //dependencies: ['setup'],
+    },
 
-    // {
-    //   name: 'features-webkit',
-    //   use: {
-    //     ...devices['Desktop Safari'],
-    //     storageState: 'auth/user.json',
-    //   },
-    //   testMatch: '**/.features-gen/**/*.spec.js',
-    //   //dependencies: ['setup'], 
-    // },
+    {
+      name: 'features-webkit',
+      use: {
+        ...devices['Desktop Safari'],
+        storageState: 'auth/user.json',
+      },
+      testMatch: '**/.features-gen/**/*.spec.js',
+      //dependencies: ['setup'], 
+    },
 
 
     /* Test against mobile viewports. */
