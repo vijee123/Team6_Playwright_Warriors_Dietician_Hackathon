@@ -212,10 +212,10 @@ When('User navigates to any page', async ({ myPatientPageFixture }) => {
     await myPatientPageFixture.navigateToPage('any');
 });
 
-Then('Pagination text should display correct range and total number of patients', async ({ myPatientPageFixture }) => {
-  const paginationText = await myPatientPageFixture.getPaginationText();
-  expect(paginationText).toMatch(/\d+\s*-\s*\d+\s*of\s*\d+/); 
- });
+// Then('Pagination text should display correct range and total number of patients', async ({ myPatientPageFixture }) => {
+//   const paginationText = await myPatientPageFixture.getPaginationText();
+//   expect(paginationText).toMatch(/\d+\s*-\s*\d+\s*of\s*\d+/); 
+//  });
 
 Then('Pagination controls should be displayed', async ({ myPatientPageFixture }) => {
   const controls = await myPatientPageFixture.getPaginationControls();

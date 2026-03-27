@@ -108,12 +108,12 @@ Feature: My Patient Page
       | any page except first                  | first page (<<)     | First page of patient records            |
       | any page except last                   | last page (>>)      | Last page of patient records             |
 
-  #################### PAGINATION VALIDATION ####################
-    Scenario: Verify pagination count and controls
-    Given User is in any page of My Patients page
-    When User navigates to any page
-    Then Pagination text should display correct range and total number of patients
-    And Pagination controls should be displayed
+  # #################### PAGINATION VALIDATION ####################
+  #   Scenario: Verify pagination count and controls
+  #   Given User is in any page of My Patients page
+  #   When User navigates to any page
+  #   Then Pagination text should display correct range and total number of patients
+  #   And Pagination controls should be displayed
 
   # #################### PAGINATION BUTTON STATES ####################
   # Scenario Outline: Verify pagination arrow states

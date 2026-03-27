@@ -52,21 +52,21 @@ export const test = base.extend({
     },
 
     // DeletePatient fixture
-    deletePatientFixture: async ({ page }, use) => {
-        console.log("Inside the editPatientPage Fixture");
-        const deletePatientPage = new DeletePatientPopupPage(page);
-        await deletePatientPage.navigateToUrl();
-        await use(deletePatientPage);
-    }
-
-
-    // //View Patient Report Fixture
-    // viewTestReportFixture:async({page},use)=>{
-    //     console.log("Inside the viewTestReport Fixture");
-    //     const viewTestReportPage = new ViewTestReportPage(page);
-    //     await viewTestReportPage.navigateToUrl();
-    //     await use(viewTestReportPage);
-
+     deletePatientFixture:async({page},use)=>{
+          console.log("Inside the editPatientPage Fixture");
+          const deletePatientPage = new DeletePatientPopupPage(page);
+          await deletePatientPage.navigateToUrl();
+          await use(deletePatientPage);       
+    },
+   
+   //viewTestReportFixture
+   viewTestReportFixture:async({page},use)=>{
+        console.log("Inside the viewTestReport Fixture");
+        const viewTestReportPage = new viewTestReportPage(page);
+        await viewTestReportPage.goto();
+        await use(viewTestReportPage);
+    },
+    
 });
 
 
