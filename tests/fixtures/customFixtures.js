@@ -1,5 +1,6 @@
+
 import { test as base } from 'playwright-bdd';
-import LoginPage from '../../pages/LoginPage.js'
+import LoginPage from '../../pages/loginPage.js'
 import DashboardPage from '../../pages/DashboardPage.js';
 import AddPatientPage from '../../pages/AddPatientsPage.js';
 import EditPatientPage from '../../pages/editPatientPage.js';
@@ -65,8 +66,6 @@ export const test = base.extend({
     //     const viewTestReportPage = new ViewTestReportPage(page);
     //     await viewTestReportPage.navigateToUrl();
     //     await use(viewTestReportPage);
-
-
 
 });
 
