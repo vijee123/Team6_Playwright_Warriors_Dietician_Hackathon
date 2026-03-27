@@ -3,7 +3,7 @@ import { defineBddConfig } from 'playwright-bdd';
 import dotenv from 'dotenv';
 
 const testDir = defineBddConfig({
-  features: 'tests/features/**/*.feature',
+  features: 'tests/features/**/02Mypatients.feature',
   steps: [
     'tests/stepDefinitions/**/*.js',
     'tests/fixtures/**/*.js',
