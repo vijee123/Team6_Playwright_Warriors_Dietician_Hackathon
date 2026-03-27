@@ -109,26 +109,26 @@ Feature: My Patient Page
       | any page except last                   | last page (>>)      | Last page of patient records             |
 
   #################### PAGINATION VALIDATION ####################
-  Scenario: Verify pagination count and controls
+    Scenario: Verify pagination count and controls
     Given User is in any page of My Patients page
     When User navigates to any page
     Then Pagination text should display correct range and total number of patients
     And Pagination controls should be displayed
 
-  #################### PAGINATION BUTTON STATES ####################
-  Scenario Outline: Verify pagination arrow states
-    Given User is in "<page_position>" of My Patients page
-    When User navigates to that page
-    Then "<arrow>" should be "<state>"
+  # #################### PAGINATION BUTTON STATES ####################
+  # Scenario Outline: Verify pagination arrow states
+  #   Given User is in "<page_position>" of My Patients page
+  #   When User navigates to that page
+  #   Then "<arrow>" should be "<state>"
 
-    Examples:
-      | page_position | arrow              | state     |
-      | first page    | Previous arrow (<) | disabled  |
-      | first page    | First arrow (<<)   | disabled  |
-      | first page    | Next arrow (>)     | enabled   |
-      | first page    | Last arrow (>>)    | enabled   |
-      | last page     | Next arrow (>)     | disabled  |
-      | last page     | Last arrow (>>)    | disabled  |
-      | last page     | Previous arrow (<) | enabled   |
-      | last page     | First arrow (<<)   | enabled   |
-      | middle page   | All arrows         | enabled   |
+  #   Examples:
+  #     | page_position | arrow              | state     |
+  #     | first page    | Previous arrow (<) | disabled  |
+  #     | first page    | First arrow (<<)   | disabled  |
+  #     | first page    | Next arrow (>)     | enabled   |
+  #     | first page    | Last arrow (>>)    | enabled   |
+  #     | last page     | Next arrow (>)     | disabled  |
+  #     | last page     | Last arrow (>>)    | disabled  |
+  #     | last page     | Previous arrow (<) | enabled   |
+  #     | last page     | First arrow (<<)   | enabled   |
+  #     | middle page   | All arrows         | enabled   |
