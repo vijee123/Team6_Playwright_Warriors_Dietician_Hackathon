@@ -78,3 +78,4 @@
 {"level":"info","message":"User clicks the Edit Icon button of a patient..","service":"Team6_Playwright_Dietician_Hackathon","timestamp":"2026-03-26 14:02:03"}
 {"level":"info","message":"User clicks the Edit Icon button of a patient..","service":"Team6_Playwright_Dietician_Hackathon","timestamp":"2026-03-26 14:02:40"}
 {"level":"info","message":"User clicks the Edit Icon button of a patient..","service":"Team6_Playwright_Dietician_Hackathon","timestamp":"2026-03-26 14:03:16"}
+{"level":"info","message":"Creating patient: with given First Name and Last Name","service":"Team6_Playwright_Dietician_Hackathon","timestamp":"2026-03-27 10:15:11"}

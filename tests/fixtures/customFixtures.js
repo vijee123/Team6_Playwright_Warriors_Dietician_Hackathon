@@ -1,5 +1,5 @@
 import{test as base} from 'playwright-bdd';
-import LoginPage from '../../pages/LoginPage.js'
+import LoginPage from '../../pages/loginPage.js'
 import DashboardPage from '../../pages/DashboardPage.js';
 import EditPatientPage from '../../pages/editPatientPage.js';
 import MyPatientsPage from '../../pages/MyPatientsPage.js';

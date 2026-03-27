@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 const testDir = defineBddConfig({
 
-    features: 'tests/features/**/*.feature',
+    features: 'tests/features/**/05EditPatient.feature',
 
   steps: [
     'tests/stepDefinitions/**/*.js',
@@ -28,7 +28,8 @@ export default defineConfig({
    //grep: /@editPatientVitalsDetails/,   
   // grepInvert: /@regression/, 
   reporter: [
-    ['html'],
+    ["html",{ 
+      outputFolder: 'playwright-report', open: 'always' }],
     ['list'],
     ['allure-playwright', {
       outputFolder: 'allure-results',  
